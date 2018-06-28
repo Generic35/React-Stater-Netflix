@@ -1,0 +1,7 @@
+{
+    // Enable/disable JavaScript validation.
+    "javascript.validate.enable": false,
+
+    // Enable/disable TypeScript validation.
+    "typescript.validate.enable": true,
+}
