@@ -24,7 +24,7 @@ test("Search should render correct amount of shows", () => {
   expect(component.find(ShowCard).length).toEqual(preload.shows.length);
 });
 
-test("Search should render correct amount of shows based on search term", () => {
+test("Search should render correct amount of shows based on search term  with redux", () => {
   const searchWord = "black";
   store.dispatch(setSearchTerm(searchWord));
   const component = render(
@@ -43,4 +43,20 @@ test("Search should render correct amount of shows based on search term", () => 
 
 
   expect(component.find(".showCard").length).toEqual(showCount);
+});
+
+
+test("Search should render correct amount of shows based on search term", () => {
+  const searchWord = "black";
+  const component = shallow(
+    <UnwrappedSearch shows={preload.shows} searchTerm={searchWord} />
+  );
+  // component.find("input").simulate("change", { target: { value: searchWord } });
+  const showCount = preload.shows.filter(
+    show =>
+      `${show.title} ${show.description}`
+        .toUpperCase()
+        .indexOf(searchWord.toUpperCase()) >= 0
+  ).length;
+  expect(component.find(ShowCard).length).toEqual(showCount);
 });
